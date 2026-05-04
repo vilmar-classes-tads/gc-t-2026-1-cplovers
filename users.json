@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Usuário Um",
+        "cpf": "111.111.111-11",
+        "email": "um@gmail.com",
+        "password": "123456",
+        "campus": "Recife",
+        "formacao": "ADS",
+        "titulacao": "Estudante",
+        "socialName": "",
+        "sexo": "Masculino",
+        "lattes": "",
+        "telefone": ""
+    },
+    {
+        "name": "Usuário Dois",
+        "cpf": "222.222.222-22",
+        "email": "dois@gmail.com",
+        "password": "123456",
+        "campus": "Recife",
+        "formacao": "ADS",
+        "titulacao": "Estudante",
+        "socialName": "",
+        "sexo": "Feminino",
+        "lattes": "",
+        "telefone": ""
+    }
+]
