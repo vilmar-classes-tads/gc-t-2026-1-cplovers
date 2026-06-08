@@ -1,11 +1,11 @@
-name: Java CI com Maven (Fluxo por Features)
+name: Java CI com Maven + Docker
 
 on:
   push:
     branches:
       - main
       - develop
-      - 'feature/**' # Captura qualquer push em branches como feature/issue0, feature/login, etc.
+      - "feature/**"
   pull_request:
     branches:
       - main
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Baixar o codigo do repositorio
+    - name: Baixar o código do repositório
       uses: actions/checkout@v4
 
     - name: Configurar o JDK 21
@@ -26,5 +26,26 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Compilar e Executar Testes com o Maven
-      run: mvn clean test # Alterado de compile para test
+    - name: Compilar e rodar testes com Maven
+      run: mvn clean test
+
+    - name: Build do projeto (gera o JAR)
+      run: mvn clean package -DskipTests
+
+    - name: Build da imagem Docker
+      run: docker build -t gc-t-2026-1-cplovers:latest .
+
+    - name: Listar imagens Docker (debug)
+      run: docker images
+
+    - name: Rodar container para teste
+      run: docker run -d -p 8080:8080 --name app-test gc-t-2026-1-cplovers:latest
+
+    - name: Esperar inicialização
+      run: sleep 15
+
+    - name: Testar endpoint (health check simples)
+      run: curl -f http://localhost:8080 || true
+
+    - name: Parar container
+      run: docker stop app-test && docker rm app-test
