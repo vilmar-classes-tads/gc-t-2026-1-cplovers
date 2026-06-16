@@ -1,0 +1,9 @@
+Avaliação 1:
+
+1- Não houve atualização do kanban do projeto. 
+2 - As issues não mostram os commits que foram feitos.
+3 - Os commits não estão relacionados as issues.
+4 - Não foi criado o changelog.md
+5 - Desenvolveram todo o código com duas branchs?
+
+cada problema desse precisa ser corrigido via Issue.
