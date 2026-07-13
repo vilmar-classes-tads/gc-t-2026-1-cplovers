@@ -1,42 +1,41 @@
 package com.cplovers.centrodepesquisa.models.entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
-@Table("tb_edital")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "tb_edital")
 public class EditalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column("titulo")
+    @Column(name = "titulo")
     private String titulo;
 
-    @Column("numero")
+    @Column(name = "numero", nullable = false)
     private int numero;
 
-    @Column("ano")
+    @Column(name = "ano", nullable = false)
     private int ano;
 
-    @Column("inicio_submissao")
+    @Column(name = "inicio_submissao")
     private LocalDate inicioSubmissao;
-    @Column("fim_submissao")
+    @Column(name = "fim_submissao")
     private LocalDate fimSubmissao;
 
-    @Column("inicio_avaliacao")
+    @Column(name = "inicio_avaliacao")
     private LocalDate inicioAvaliacao;
-    @Column("fim_avaliacao")
+    @Column(name = "fim_avaliacao")
     private LocalDate fimAvaliacao;
 
 

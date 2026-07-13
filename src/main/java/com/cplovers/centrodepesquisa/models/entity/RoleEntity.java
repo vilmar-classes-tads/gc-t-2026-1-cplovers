@@ -1,28 +1,30 @@
 package com.cplovers.centrodepesquisa.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.security.core.GrantedAuthority;
 
-@Table("tb_roles")
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleEntity implements GrantedAuthority {
+@Entity
+@Table(name = "tb_roles")
+public class RoleEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
-
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private Set<UserEntity> users = new HashSet<>();
 }
