@@ -1,100 +1,65 @@
 package com.cplovers.centrodepesquisa.models.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
-import org.jspecify.annotations.Nullable;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Table("tb_users")
+@Entity
+@Table(name = "tb_users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity implements UserDetails, Persistable<String> {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column("cpf")
+    @Column(name = "cpf", nullable = false)
     private String cpf;
 
-    @Column("nome")
+    @Column(name = "nome", nullable = false)
     private String name;
 
-    @Column("nome_social")
+    @Column(name = "nome_social")
     private String socialName;
 
-    @Column("email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column("password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column("campus")
+    @Column(name = "campus", nullable = false)
     private String campus;
 
-    @Column("formacao")
+    @Column(name = "formacao", nullable = false)
     private String formacao;
 
-    @Column("titulacao")
+    @Column(name = "titulacao", nullable = false)
     private String titulacao;
 
-    @Column("sexo")
+    @Column(name =  "sexo")
     private String sexo;
 
-    @Column("lattes")
+    @Column(name = "lattes")
     private String lattes;
 
-    @Column("telefone")
+    @Column(name = "telefone")
     private String telefone;
+
+    @ManyToMany
+    @JoinTable(
+         name = "tb_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<RoleEntity> roles = new HashSet<>();
 
     @Transient
     private boolean isNew = true;
 
-    @MappedCollection(idColumn = "user_cpf")
-    private Set<UserRole> roles = new HashSet<>();
-
-    @Override
-    public @Nullable String getId() {
-        return cpf;
-    }
-
-    @Override
-    public boolean isNew() {
-        return isNew;
-    }
-
-    @Override
-    public String getUsername() { return name; }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(r -> (GrantedAuthority) () -> "ROLE_" + r.roleId())
-                .toList();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() { return true; }
-
-    @Override
-    public boolean isAccountNonLocked() { return true; }
-
-    @Override
-    public boolean isCredentialsNonExpired() { return true; }
-
-    @Override
-    public boolean isEnabled() { return true; }
 }

@@ -1,0 +1,14 @@
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/CentrodepesquisaApplication.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/config/SecurityConfig.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/controllers/EditalController.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/controllers/UserController.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/dtos/CreateUserDto.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/dtos/EditalDto.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/entity/EditalEntity.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/entity/RoleEntity.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/entity/UserEntity.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/repository/EditalRepository.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/repository/RoleRepository.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/models/repository/UserRepository.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/services/EditalService.java
+/mnt/6a83a2b5-5454-4d5f-9198-1f2a2be811aa/workspace-java/gc-t-2026-1-cplovers/src/main/java/com/cplovers/centrodepesquisa/services/UserService.java

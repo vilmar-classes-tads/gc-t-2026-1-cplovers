@@ -1,12 +1,12 @@
 package com.cplovers.centrodepesquisa.services;
 
 import com.cplovers.centrodepesquisa.models.dtos.CreateUserDto;
+import com.cplovers.centrodepesquisa.models.entity.RoleEntity;
 import com.cplovers.centrodepesquisa.models.entity.UserEntity;
-import com.cplovers.centrodepesquisa.models.entity.UserRole;
+import com.cplovers.centrodepesquisa.models.repository.RoleRepository;
 import com.cplovers.centrodepesquisa.models.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    @Autowired
     private final UserRepository userRepository;
-    @Autowired
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
     public List<UserEntity> getUsers() {
         return userRepository.findAll();
@@ -27,33 +26,36 @@ public class UserService {
 
     public String createUser(@NonNull CreateUserDto data) {
 
-        if(userRepository.existsByCpf(data.cpf()))
+        if (userRepository.existsByCpf(data.cpf()))
             throw new IllegalArgumentException("CPF já cadastrado");
 
-        if(userRepository.existsByEmail(data.email()))
+        if (userRepository.existsByEmail(data.email()))
             throw new IllegalArgumentException("Email já cadastrado.");
 
-        var Entity = new UserEntity();
-        var roles = new HashSet<UserRole>();
-        roles.add(new UserRole(1));
-        roles.add(new UserRole(2));
+        var entity = new UserEntity();
+        var roles = new HashSet<RoleEntity>();
 
-        Entity.setRoles(roles);
-        Entity.setCpf(data.cpf());
-        Entity.setName(data.name());
-        Entity.setSocialName(data.socialName());
-        Entity.setEmail(data.email());
-        Entity.setPassword(passwordEncoder.encode(data.password()));
-        Entity.setCampus(data.campus());
-        Entity.setFormacao(data.formacao());
-        Entity.setTitulacao(data.titulacao());
-        Entity.setSexo(data.sexo());
-        Entity.setLattes(data.lattes());
-        Entity.setTelefone(data.telefone());
-        System.out.println(">>>>>>>>>>>>>> Antes do save: " + Entity.getCpf());
-        var savedUser = userRepository.save(Entity);
+        roles.add(roleRepository.findById(1L)
+                .orElseThrow(() -> new IllegalStateException("Role padrão 1 não encontrada")));
+        roles.add(roleRepository.findById(2L)
+                .orElseThrow(() -> new IllegalStateException("Role padrão 2 não encontrada")));
+
+        entity.setRoles(roles);
+        entity.setCpf(data.cpf());
+        entity.setName(data.name());
+        entity.setSocialName(data.socialName());
+        entity.setEmail(data.email());
+        entity.setPassword(passwordEncoder.encode(data.password()));
+        entity.setCampus(data.campus());
+        entity.setFormacao(data.formacao());
+        entity.setTitulacao(data.titulacao());
+        entity.setSexo(data.sexo());
+        entity.setLattes(data.lattes());
+        entity.setTelefone(data.telefone());
+        System.out.println(">>>>>>>>>>>>>> Antes do save: " + entity.getCpf());
+        var savedUser = userRepository.save(entity);
         System.out.println(">>>>>>>>>>>>>> Depois do save: " + savedUser.getCpf());
 
         return savedUser.getCpf();
-    };
+    }
 }
